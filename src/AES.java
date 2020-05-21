@@ -11,6 +11,10 @@ public class AES {
     private static SecretKeySpec secretKey;
     private static byte[] key;
 
+    /**
+     * This will set a static variable in order for the secret key to be used in the other methods.
+     * @param myKey the string that will be used as the actual key for both encrypting and decrypting
+     */
     public static void setKey(String myKey) {
         MessageDigest sha = null;
         try {
@@ -27,7 +31,13 @@ public class AES {
             e.printStackTrace();
         }
     }
-    
+
+    /**
+     * This method encrypts the given text with the secret key
+     * @param strToEncrypt the original string before being encrypted
+     * @param secret the secret key being used to encrypt the string
+     * @return the string after being encrypted with the secret key
+     */
     public static String encrypt(String strToEncrypt, String secret) {
         try {
             setKey(secret);
@@ -40,7 +50,14 @@ public class AES {
         }
         return null;
     }
-    
+
+    /**
+     * This method decrypts the given text with the secret key. 
+     * This must be the same key used with the encrypt method!
+     * @param strToDecrypt the encrypted string that will be decrypted
+     * @param secret the secret key being used to decrypt the string
+     * @return the string after being decrypted with the secret key
+     */
     public static String decrypt(String strToDecrypt, String secret) {
         try {
             setKey(secret);

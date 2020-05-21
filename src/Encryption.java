@@ -10,16 +10,16 @@ public class Encryption {
 	    }
 		final String secretKey = keyFromFile(args[0]);
 		String encryptedFile = args[1].replace("txt", "encrypt");
-	    
+
 		// These three are for the file that contains the message to be encrypted
 		File secretFile = new File(args[1]);
 		FileReader fr = new FileReader(secretFile);
 		BufferedReader br = new BufferedReader(fr);
-		
+
 		// These two are for the file where the encrypted message will be sent
 		FileWriter fw = new FileWriter(encryptedFile);
 		PrintWriter pw = new PrintWriter(fw);
-		
+
 		String line;
 		while((line = br.readLine()) != null) {
 			String encryptedString = AES.encrypt(line, secretKey);
@@ -27,10 +27,10 @@ public class Encryption {
 			System.out.println(encryptedString + "\n");
 			pw.printf("%s\n", encryptedString);
 		}
-		
+
 		closeFiles(br, fr, pw, fw);
 	}
-	
+
 	/**
 	 * This will get the key from the key file and return it back for utilization elsewhere
 	 * @param fileName the one line file that contains the key to be utilized for encryption
@@ -41,15 +41,15 @@ public class Encryption {
 		File keyFile = new File(fileName);
 		FileReader fr = new FileReader(keyFile);
 		BufferedReader br = new BufferedReader(fr);
-		
+
 		String key = br.readLine();
-		
+
 		br.close();
 		fr.close();
-		
+
 		return key;
 	}
-	
+
 	/**
 	 * This will close all the open files used by the program. A way to gather them all together.
 	 * @param br the buffered reader from the file that contained the message to encrypt
